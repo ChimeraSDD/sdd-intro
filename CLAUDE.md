@@ -1,51 +1,42 @@
 ### 🔄 Project Awareness & Context
-- **Always read `PLANNING.md`** at the start of a new conversation to understand the project's architecture, goals, style, and constraints.
 - **Check `TASK.md`** before starting a new task. If the task isn’t listed, add it with a brief description and today's date.
-- **Use consistent naming conventions, file structure, and architecture patterns** as described in `PLANNING.md`.
-- **Use venv_linux** (the virtual environment) whenever executing Python commands, including for unit tests.
+
+### 🔙Error Feedback Capture Process
+- When the human identifies an error or requests a changed approach, log the correction to FEEDBACK_LOG.md before making the fix.
+- Use the format: date, what was wrong, correction given, category.
+
+### 🤔Before Planning Any Work
+
+Before creating a plan or beginning any task, you **MUST**:
+
+1. **Read the file LESSONS_LEARNED.md in full.**
+2. **Identify any lessons relevant to the work being requested.**
+3. **Incorporate those lessons into your approach before writing a single line of code or proposing a plan.**
+
+**Do not proceed with planning until you have completed this step.** If LESSONS_LEARNED.md does not exist yet, continue normally.
+
+**Before presenting your plan, briefly state which lessons from LESSONS_LEARNED.md 
+are applicable to this task, and how you have accounted for them. If none apply, 
+state that explicitly.**
+
+### 🥅 Goals
+
+### 🗼 Architecture
+
+### 📎Style & Conventions
+
+### 🛑 Constraints
 
 ### 🧱 Code Structure & Modularity
 - **Never create a file longer than 500 lines of code.** If a file approaches this limit, refactor by splitting it into modules or helper files.
 - **Organize code into clearly separated modules**, grouped by feature or responsibility.
-  For agents this looks like:
-    - `agent.py` - Main agent definition and execution logic 
-    - `tools.py` - Tool functions used by the agent 
-    - `prompts.py` - System prompts
 - **Use clear, consistent imports** (prefer relative imports within packages).
-- **Use clear, consistent imports** (prefer relative imports within packages).
-- **Use python_dotenv and load_env()** for environment variables.
+- **Never store keys, passwords in the code.**
 
 ### 🧪 Testing & Reliability
-- **Always create Pytest unit tests for new features** (functions, classes, routes, etc).
-- **After updating any logic**, check whether existing unit tests need to be updated. If so, do it.
-- **Tests should live in a `/tests` folder** mirroring the main app structure.
-  - Include at least:
-    - 1 test for expected use
-    - 1 edge case
-    - 1 failure case
-
 ### ✅ Task Completion
 - **Mark completed tasks in `TASK.md`** immediately after finishing them.
 - Add new sub-tasks or TODOs discovered during development to `TASK.md` under a “Discovered During Work” section.
-
-### 📎 Style & Conventions
-- **Use Python** as the primary language.
-- **Follow PEP8**, use type hints, and format with `black`.
-- **Use `pydantic` for data validation**.
-- Use `FastAPI` for APIs and `SQLAlchemy` or `SQLModel` for ORM if applicable.
-- Write **docstrings for every function** using the Google style:
-  ```python
-  def example():
-      """
-      Brief summary.
-
-      Args:
-          param1 (type): Description.
-
-      Returns:
-          type: Description.
-      """
-  ```
 
 ### 📚 Documentation & Explainability
 - **Update `README.md`** when new features are added, dependencies change, or setup steps are modified.
