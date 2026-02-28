@@ -1,0 +1,360 @@
+SCREEN TITLE: Document Info Record - Search Documents
+SCREEN DIMENSIONS: Desktop widescreen (approx 16:9)
+BACKGROUND: Light grey (#f5f5f5)
+
+LAYOUT:
+Top navigation bar, full-width red alert banner, page title, and a collapsible search panel card with two-column layout for document type checkboxes on the right.
+
+COMPONENTS:
+
+- ID: comp_01
+  TYPE: navbar
+  LABEL: [Top Navigation Bar]
+  POSITION: top-full-width
+  APPROXIMATE_X: 0
+  APPROXIMATE_Y: 0
+  APPROXIMATE_W: 1000
+  APPROXIMATE_H: 40
+  COLOR: white
+  NOTES: Contains logo (black rectangle) top-left, nav links top-right: VENDOR DOCUMENTS, MY REQUESTS, SOURCING REQUESTS, ARCHIVE, DOCUMENT INFO RECORD (active/underlined), CONFIGURATION, and user avatar icon
+
+- ID: comp_02
+  TYPE: label
+  LABEL: [Logo / Brand]
+  POSITION: top-left
+  APPROXIMATE_X: 10
+  APPROXIMATE_Y: 5
+  APPROXIMATE_W: 100
+  APPROXIMATE_H: 28
+  COLOR: black
+  NOTES: Black rectangle, company logo placeholder
+
+- ID: comp_03
+  TYPE: label
+  LABEL: VENDOR DOCUMENTS
+  POSITION: top-right area
+  APPROXIMATE_X: 590
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 110
+  APPROXIMATE_H: 20
+  COLOR: dark grey
+  NOTES: Nav link
+
+- ID: comp_04
+  TYPE: label
+  LABEL: MY REQUESTS
+  POSITION: top-right area
+  APPROXIMATE_X: 710
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 80
+  APPROXIMATE_H: 20
+  COLOR: dark grey
+  NOTES: Nav link
+
+- ID: comp_05
+  TYPE: label
+  LABEL: SOURCING REQUESTS
+  POSITION: top-right area
+  APPROXIMATE_X: 800
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 110
+  APPROXIMATE_H: 20
+  COLOR: dark grey
+  NOTES: Nav link
+
+- ID: comp_06
+  TYPE: label
+  LABEL: ARCHIVE
+  POSITION: top-right area
+  APPROXIMATE_X: 920
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 55
+  APPROXIMATE_H: 20
+  COLOR: dark grey
+  NOTES: Nav link
+
+- ID: comp_07
+  TYPE: label
+  LABEL: DOCUMENT INFO RECORD
+  POSITION: top-right area
+  APPROXIMATE_X: 985
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 130
+  APPROXIMATE_H: 20
+  COLOR: dark (active)
+  NOTES: Active nav link with underline indicator
+
+- ID: comp_08
+  TYPE: label
+  LABEL: CONFIGURATION
+  POSITION: top-right area
+  APPROXIMATE_X: 1125
+  APPROXIMATE_Y: 10
+  APPROXIMATE_W: 90
+  APPROXIMATE_H: 20
+  COLOR: dark grey
+  NOTES: Nav link with dropdown chevron
+
+- ID: comp_09
+  TYPE: icon
+  LABEL: [User Avatar]
+  POSITION: top-right
+  APPROXIMATE_X: 1230
+  APPROXIMATE_Y: 5
+  APPROXIMATE_W: 30
+  APPROXIMATE_H: 30
+  COLOR: grey
+  NOTES: Circle avatar icon
+
+- ID: comp_10
+  TYPE: divider
+  LABEL: You are in test system
+  POSITION: top full-width below navbar
+  APPROXIMATE_X: 0
+  APPROXIMATE_Y: 40
+  APPROXIMATE_W: 1000
+  APPROXIMATE_H: 35
+  COLOR: dark red (#8b1a1a)
+  NOTES: Full-width alert banner with centered white text
+
+- ID: comp_11
+  TYPE: header
+  LABEL: Document Info Record
+  POSITION: top-left below banner
+  APPROXIMATE_X: 15
+  APPROXIMATE_Y: 85
+  APPROXIMATE_W: 250
+  APPROXIMATE_H: 30
+  COLOR: black
+  NOTES: Page title, bold
+
+- ID: comp_12
+  TYPE: card
+  LABEL: Search Documents
+  POSITION: center-top
+  APPROXIMATE_X: 15
+  APPROXIMATE_Y: 125
+  APPROXIMATE_W: 970
+  APPROXIMATE_H: 240
+  COLOR: white
+  NOTES: Collapsible card with chevron/collapse icon top-right. Contains the search form.
+
+- ID: comp_13
+  TYPE: label
+  LABEL: Search Documents
+  POSITION: card header
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 135
+  APPROXIMATE_W: 150
+  APPROXIMATE_H: 20
+  COLOR: dark
+  NOTES: Card section title
+
+- ID: comp_14
+  TYPE: label
+  LABEL: What do you want to work on? *
+  POSITION: inside card, left column
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 160
+  APPROXIMATE_W: 200
+  APPROXIMATE_H: 18
+  COLOR: dark grey
+  NOTES: Field label with required asterisk
+
+- ID: comp_15
+  TYPE: dropdown
+  LABEL: Product documentation
+  POSITION: inside card, left column
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 178
+  APPROXIMATE_W: 250
+  APPROXIMATE_H: 32
+  COLOR: white
+  NOTES: Dropdown selector, partially redacted label, has chevron arrow
+
+- ID: comp_16
+  TYPE: label
+  LABEL: Material *
+  POSITION: inside card, left column
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 218
+  APPROXIMATE_W: 80
+  APPROXIMATE_H: 18
+  COLOR: dark grey
+  NOTES: Field label with required asterisk
+
+- ID: comp_17
+  TYPE: input
+  LABEL: 60172 : ISOTHIAZOLINE 1,5% DRUMTH 209KG PMRA
+  POSITION: inside card, left column
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 236
+  APPROXIMATE_W: 500
+  APPROXIMATE_H: 30
+  COLOR: white
+  NOTES: Text input with material number and description
+
+- ID: comp_18
+  TYPE: label
+  LABEL: Relevant document types *
+  POSITION: inside card, right section header
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 160
+  APPROXIMATE_W: 180
+  APPROXIMATE_H: 18
+  COLOR: dark grey
+  NOTES: Section label for checkboxes on right side
+
+- ID: comp_19
+  TYPE: checkbox
+  LABEL: Check All
+  POSITION: inside card, right column top
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 178
+  APPROXIMATE_W: 120
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_20
+  TYPE: checkbox
+  LABEL: Cert. of Conformity
+  POSITION: inside card, right column
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 198
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_21
+  TYPE: checkbox
+  LABEL: CoA for Finished Pr.
+  POSITION: inside card, right column
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 215
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_22
+  TYPE: checkbox
+  LABEL: Manufacturing Plan
+  POSITION: inside card, right column
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 232
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_23
+  TYPE: checkbox
+  LABEL: Product Info. Form
+  POSITION: inside card, right column
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 249
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_24
+  TYPE: checkbox
+  LABEL: Sales Specification
+  POSITION: inside card, right column
+  APPROXIMATE_X: 520
+  APPROXIMATE_Y: 266
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_25
+  TYPE: checkbox
+  LABEL: Auth. Confirmation
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 178
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_26
+  TYPE: checkbox
+  LABEL: Certification
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 198
+  APPROXIMATE_W: 100
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_27
+  TYPE: checkbox
+  LABEL: CoA for Traded Goods
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 215
+  APPROXIMATE_W: 150
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_28
+  TYPE: checkbox
+  LABEL: Pr. Research Summary
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 232
+  APPROXIMATE_W: 150
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_29
+  TYPE: checkbox
+  LABEL: Raw Material Quest.
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 249
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_30
+  TYPE: checkbox
+  LABEL: Technical Data Sheet
+  POSITION: inside card, far right column
+  APPROXIMATE_X: 790
+  APPROXIMATE_Y: 266
+  APPROXIMATE_W: 140
+  APPROXIMATE_H: 18
+  COLOR: white
+  NOTES: Unchecked checkbox
+
+- ID: comp_31
+  TYPE: button
+  LABEL: FIND DOCUMENTS
+  POSITION: inside card, bottom-left
+  APPROXIMATE_X: 30
+  APPROXIMATE_Y: 295
+  APPROXIMATE_W: 130
+  APPROXIMATE_H: 32
+  COLOR: black
+  NOTES: Primary action button, white text on black background
+
+- ID: comp_32
+  TYPE: footer
+  LABEL: ©Kemira
+  POSITION: bottom-center
+  APPROXIMATE_X: 480
+  APPROXIMATE_Y: 970
+  APPROXIMATE_W: 60
+  APPROXIMATE_H: 20
+  COLOR: grey
+  NOTES: Copyright footer

@@ -1,15 +1,14 @@
 ## FEATURE:
 
-[Insert your feature here]
+### Feature 1
+- Read the text file `docs/gui_description.txt`
+- Use the description of the screen layout in that file to create a corresponding Alpine.js HTML page.
 
 ## EXAMPLES:
-
-[Provide and explain examples that you have in the `examples/` folder]
+No examples provided.
 
 ## DOCUMENTATION:
-
-[List out any documentation (web pages, sources for an MCP server like Crawl4AI RAG, etc.) that will need to be referenced during development]
+Alpine.js documentation: https://alpinejs.dev/
 
 ## OTHER CONSIDERATIONS:
 
-[Any other considerations or specific requirements - great place to include gotchas that you see AI coding assistants miss with your projects a lot]

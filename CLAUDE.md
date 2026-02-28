@@ -21,11 +21,27 @@ state that explicitly.**
 
 ### 🥅 Goals
 
+- To Read a text description file of a screen layout, and construct an Alpine.js screen from that description.
+
 ### 🗼 Architecture
+
+- Use Alpine.js as the JavaScript framework.
 
 ### 📎Style & Conventions
 
+- Keep logic out of the DOM (use methods, not inline expressions).
+- Use consistent attribute ordering (`x-data` → `x-init` → bindings → events → conditionals → transitions).
+- Prefer extracted JS functions for non-trivial components.
+- Use meaningful camelCase names for state and verbs for methods.
+- Only use stores for shared, long-lived state.
+- Keep components shallow and well‑commented.
+- Prefer `x-text`, `:class` objects, and avoid `x-html` for untrusted content.
+- Use `x-init` only for side effects; call `init()` for logic.
+- Document component inputs, outputs, and events.
+
 ### 🛑 Constraints
+
+- Never inject untrusted HTML via Alpine
 
 ### 🧱 Code Structure & Modularity
 - **Never create a file longer than 500 lines of code.** If a file approaches this limit, refactor by splitting it into modules or helper files.
