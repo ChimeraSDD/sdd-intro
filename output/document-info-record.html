@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Info Record - Search Documents</title>
+
+  <!-- Tailwind CSS via Play CDN (prototype use only — no build step required) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    /**
+     * documentSearchApp — Alpine.js component for the Document Info Record search screen.
+     *
+     * Inputs:  none (self-contained page)
+     * Outputs: console.log on findDocuments()
+     * Events:  none (no parent components)
+     *
+     * REASON: Component function MUST be defined before Alpine initialises.
+     * Alpine scans the DOM on load; if this function is not in global scope first,
+     * x-data="documentSearchApp()" will throw "ReferenceError: documentSearchApp is not defined".
+     */
+    function documentSearchApp() {
+      return {
+        // --- State ---
+        isSearchPanelOpen: true,
+        workOn: 'Product documentation',
+        material: '12345 : CLEANING FLUID 4,5% ABS 1 LTR',
+        allChecked: false,
+        alertMessage: 'You are in test system',
+        footerText: '©Chimera',
+        docTypes: {
+          certConformity:     false,
+          coaFinished:        false,
+          manufacturingPlan:  false,
+          productInfoForm:    false,
+          salesSpec:          false,
+          authConfirmation:   false,
+          certification:      false,
+          coaTraded:          false,
+          prResearchSummary:  false,
+          rawMaterialQuest:   false,
+          technicalDataSheet: false,
+        },
+
+        // --- Lifecycle ---
+
+        /**
+         * init — called by x-init (CLAUDE.md: x-init only for side effects).
+         * Sets up a deep watcher to keep allChecked in sync when individual checkboxes change.
+         */
+        init() {
+          this.$watch('docTypes', () => {
+            const vals = Object.values(this.docTypes);
+            this.allChecked = vals.length > 0 && vals.every(Boolean);
+          }, { deep: true });
+        },
+
+        // --- Methods ---
+
+        /** toggleSearchPanel — flips the collapsible search card open/closed. */
+        toggleSearchPanel() {
+          this.isSearchPanelOpen = !this.isSearchPanelOpen;
+        },
+
+        /**
+         * toggleAll — sets all docTypes values to match the allChecked state.
+         * REASON: Centralises "Check All" logic here rather than inline in @change.
+         */
+        toggleAll() {
+          Object.keys(this.docTypes).forEach(key => {
+            this.docTypes[key] = this.allChecked;
+          });
+        },
+
+        /**
+         * findDocuments — collects form state and logs to console.
+         * Would trigger a search API call in a real implementation.
+         */
+        findDocuments() {
+          const selected = Object.entries(this.docTypes)
+            .filter(([, v]) => v)
+            .map(([k]) => k);
+          console.log('Find Documents:', {
+            workOn: this.workOn,
+            material: this.material,
+            selectedDocTypes: selected,
+          });
+        },
+
+        /** chevronLabel — returns the correct chevron character for the search panel toggle. */
+        chevronLabel() {
+          return this.isSearchPanelOpen ? '▴' : '▾';
+        },
+      };
+    }
+  </script>
+
+  <!--
+    CRITICAL: defer ensures Alpine initialises after the DOM is parsed.
+    This script tag must come AFTER the documentSearchApp() definition above.
+  -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<!--
+  Attribute ordering (CLAUDE.md): x-data → x-init → bindings → events → conditionals → transitions
+  Custom background colour applied via inline style (no Tailwind utility for #f5f5f5).
+-->
+<body
+  x-data="documentSearchApp()"
+  x-init="init()"
+  style="background-color:#f5f5f5; min-height:100vh;"
+  class="font-sans text-sm antialiased"
+>
+
+  <!-- =========================================================
+       comp_01: Navigation Bar
+       comp_02: Logo / Brand (black rectangle placeholder)
+       comp_03-08: Nav links
+       comp_09: User Avatar
+       ========================================================= -->
+  <nav class="bg-white shadow-sm px-6 py-2 flex items-center justify-between">
+
+    <!-- comp_02: Logo — black rectangle, top-left -->
+    <div class="bg-black w-28 h-7 rounded-sm flex-shrink-0" aria-label="Company logo"></div>
+
+    <!-- comp_03-09: Nav links + avatar, right-aligned -->
+    <div class="flex items-center gap-5 text-xs font-medium text-gray-600 uppercase tracking-wide">
+
+      <!-- comp_03 -->
+      <a href="#" class="hover:text-gray-900 transition-colors">Vendor Documents</a>
+
+      <!-- comp_04 -->
+      <a href="#" class="hover:text-gray-900 transition-colors">My Requests</a>
+
+      <!-- comp_05 -->
+      <a href="#" class="hover:text-gray-900 transition-colors">Sourcing Requests</a>
+
+      <!-- comp_06 -->
+      <a href="#" class="hover:text-gray-900 transition-colors">Archive</a>
+
+      <!-- comp_07: Active nav link — bold + bottom border to indicate current page -->
+      <a
+        href="#"
+        class="text-gray-900 font-bold border-b-2 border-gray-900 pb-0.5"
+        aria-current="page"
+      >Document Info Record</a>
+
+      <!-- comp_08: Configuration with dropdown chevron -->
+      <a href="#" class="hover:text-gray-900 transition-colors flex items-center gap-1">
+        Configuration <span aria-hidden="true">▾</span>
+      </a>
+
+      <!-- comp_09: User avatar circle -->
+      <div
+        class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs flex-shrink-0"
+        aria-label="User account"
+      >
+        <!-- Avatar icon placeholder -->
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       comp_10: Alert Banner — dark red, full-width, centered white text
+       Custom colour #8b1a1a applied via inline style (not available as a Tailwind utility).
+       x-text used per CLAUDE.md: keeps text content in state, not hard-coded in markup.
+       ========================================================= -->
+  <div
+    class="w-full py-2 text-center text-white text-sm font-medium"
+    style="background-color:#8b1a1a;"
+    role="alert"
+  >
+    <span x-text="alertMessage"></span>
+  </div>
+
+  <!-- Main content area -->
+  <main class="max-w-screen-xl mx-auto px-6 py-5">
+
+    <!-- =========================================================
+         comp_11: Page Title
+         ========================================================= -->
+    <h1 class="text-xl font-bold text-gray-900 mb-4">Document Info Record</h1>
+
+    <!-- =========================================================
+         comp_12: Search Card — white card, collapsible
+         comp_13: Card header label "Search Documents"
+         ========================================================= -->
+    <div class="bg-white border border-gray-200 rounded shadow-sm">
+
+      <!-- Card header -->
+      <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+
+        <!-- comp_13: Card title -->
+        <span class="font-semibold text-gray-800 text-sm">Search Documents</span>
+
+        <!-- Chevron toggle button — calls method, no inline mutation (CLAUDE.md) -->
+        <button
+          @click="toggleSearchPanel()"
+          class="text-gray-500 hover:text-gray-800 text-base leading-none p-1 rounded hover:bg-gray-50 transition-colors"
+          :aria-label="isSearchPanelOpen ? 'Collapse search panel' : 'Expand search panel'"
+          :aria-expanded="isSearchPanelOpen"
+        >
+          <span x-text="chevronLabel()" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+      <!-- =========================================================
+           Card body — collapsible via x-show + x-transition
+           comp_14-17: Left column (dropdown + text input)
+           comp_18-30: Right column (checkboxes)
+           comp_31: FIND DOCUMENTS button
+           ========================================================= -->
+      <div
+        x-show="isSearchPanelOpen"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 -translate-y-1"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-1"
+        class="px-5 py-5"
+      >
+
+        <!-- Two-column flex layout: left form fields | right checkboxes -->
+        <div class="flex gap-10 flex-wrap">
+
+          <!-- =====================================================
+               LEFT COLUMN: form fields
+               comp_14: label "What do you want to work on? *"
+               comp_15: dropdown
+               comp_16: label "Material *"
+               comp_17: text input
+               ===================================================== -->
+          <div class="flex flex-col gap-4" style="min-width:260px; max-width:320px;">
+
+            <!-- comp_14 + comp_15: Work on dropdown -->
+            <div>
+              <label class="block text-xs text-gray-600 mb-1" for="workOnSelect">
+                What do you want to work on?
+                <span class="text-red-600" aria-label="required">*</span>
+              </label>
+              <select
+                id="workOnSelect"
+                x-model="workOn"
+                class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-gray-400"
+              >
+                <option>Product documentation</option>
+                <option>Safety documentation</option>
+                <option>Quality documentation</option>
+              </select>
+            </div>
+
+            <!-- comp_16 + comp_17: Material text input -->
+            <div>
+              <label class="block text-xs text-gray-600 mb-1" for="materialInput">
+                Material
+                <span class="text-red-600" aria-label="required">*</span>
+              </label>
+              <input
+                id="materialInput"
+                type="text"
+                x-model="material"
+                class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-gray-400"
+              />
+            </div>
+
+          </div><!-- end left column -->
+
+          <!-- =====================================================
+               RIGHT COLUMN: document type checkboxes
+               comp_18: section label
+               comp_19: Check All
+               comp_20-24: first sub-column (5 items)
+               comp_25-30: second sub-column (6 items)
+               ===================================================== -->
+          <div class="flex flex-col gap-2 flex-1">
+
+            <!-- comp_18: Section label -->
+            <label class="text-xs text-gray-600">
+              Relevant document types
+              <span class="text-red-600" aria-label="required">*</span>
+            </label>
+
+            <!-- comp_19: Check All -->
+            <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 mb-1">
+              <input
+                type="checkbox"
+                x-model="allChecked"
+                @change="toggleAll()"
+                class="rounded accent-gray-800"
+              />
+              <span x-text="'Check All'"></span>
+            </label>
+
+            <!-- Two sub-columns of individual checkboxes -->
+            <div class="flex gap-10 flex-wrap">
+
+              <!-- Left sub-column: comp_20–comp_24 -->
+              <div class="flex flex-col gap-1.5">
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.certConformity" class="rounded accent-gray-800" />
+                  Cert. of Conformity
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.coaFinished" class="rounded accent-gray-800" />
+                  CoA for Finished Pr.
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.manufacturingPlan" class="rounded accent-gray-800" />
+                  Manufacturing Plan
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.productInfoForm" class="rounded accent-gray-800" />
+                  Product Info. Form
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.salesSpec" class="rounded accent-gray-800" />
+                  Sales Specification
+                </label>
+              </div><!-- end left sub-column -->
+
+              <!-- Right sub-column: comp_25–comp_30 -->
+              <div class="flex flex-col gap-1.5">
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.authConfirmation" class="rounded accent-gray-800" />
+                  Auth. Confirmation
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.certification" class="rounded accent-gray-800" />
+                  Certification
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.coaTraded" class="rounded accent-gray-800" />
+                  CoA for Traded Goods
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.prResearchSummary" class="rounded accent-gray-800" />
+                  Pr. Research Summary
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.rawMaterialQuest" class="rounded accent-gray-800" />
+                  Raw Material Quest.
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" x-model="docTypes.technicalDataSheet" class="rounded accent-gray-800" />
+                  Technical Data Sheet
+                </label>
+              </div><!-- end right sub-column -->
+
+            </div><!-- end two sub-columns -->
+
+          </div><!-- end right column -->
+
+        </div><!-- end two-column grid -->
+
+        <!-- =========================================================
+             comp_31: FIND DOCUMENTS button — bottom-left of card body
+             @click calls method (CLAUDE.md: no inline logic in DOM)
+             ========================================================= -->
+        <div class="mt-5">
+          <button
+            @click="findDocuments()"
+            class="bg-black text-white text-xs font-bold uppercase tracking-widest px-5 py-2 rounded hover:bg-gray-800 active:bg-gray-900 transition-colors"
+          >
+            Find Documents
+          </button>
+        </div>
+
+      </div><!-- end card body -->
+
+    </div><!-- end search card -->
+
+  </main>
+
+  <!-- =========================================================
+       comp_32: Footer — centered grey copyright text
+       x-text used per CLAUDE.md convention for dynamic text.
+       ========================================================= -->
+  <footer class="text-center text-gray-400 text-xs py-6 mt-8">
+    <span x-text="footerText"></span>
+  </footer>
+
+</body>
+</html>
